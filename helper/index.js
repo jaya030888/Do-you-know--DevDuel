@@ -1,7 +1,22 @@
-
 // Take the choice from frontend Drop Down menue [easy,med,hard,mix]
 const choice = "replace it with the element's value"
 let url = ''
+
+
+const playButton = document.querySelector('#play button'); 
+
+playButton.addEventListener('click', () => {
+    audio.muted = false;
+    audio.volume = 0.15
+    audio.play().then(() => {
+        console.log("Audio playing successfully.");
+    }).catch(error => {
+        console.log("Playback failed:", error);
+    });
+
+
+});
+
 
 // Api url
 let mix = 'https://opentdb.com/api.php?amount=10'
