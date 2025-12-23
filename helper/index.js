@@ -1,7 +1,7 @@
 
 // Take the choice from frontend Drop Down menue [easy,med,hard,mix]
 const choice = "replace it with the element's value"
-const url = ''
+let url = ''
 
 // Api url
 let mix = 'https://opentdb.com/api.php?amount=10'
