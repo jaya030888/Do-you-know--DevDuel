@@ -13,13 +13,9 @@
     <source src="./assets/tradegy of gods chosen emperor.mp3" type="audio/mpeg">
 </audio>
 
-
-<main id="main">
-    <img src="./assets/web gfx/mobile.jpeg" alt="">
-    <Video id="startVideo" autoplay muted playsinline>
-        <source src="./assets/quiz start.mp4" >
-    </Video>
-</main>
+<div id="splash" class="splash-screen">
+    <img src="./assets/web gfx/mobile.jpeg" alt="Welcome">
+</div>
 
 <div id="play">
     <img src="./assets/web gfx/focus.jpeg" alt="">
@@ -27,17 +23,44 @@
         <h1>Do you know?</h1>
         <h3>There are 10 questions</h3>
     </div>
-    <div>
+
+        <div class="category">
+          <label>
+            <input type="radio" name="level" value="easy" />
+            <span>Easy</span>
+          </label>
+        
+          <label>
+            <input type="radio" name="level" value="medium" />
+            <span>Medium</span>
+          </label>
+        
+          <label>
+            <input type="radio" name="level" value="hard" />
+            <span>Hard</span>
+          </label>
+        
+          <label>
+            <input type="radio" name="level" value="mix" />
+            <span>Mix</span>
+          </label>
+        </div>
+    
+    <!-- <div>
         <h5>Easy: 1 point</h5>
         <h5>Medium: 2 point</h5>
         <h5>hard: 4 point</h5>
-    </div>
+    </div> -->
 
     <h3>Average score is 5+</h3>
     <button>Lets Go!</button>
 </div>
 
-
+<main id="main">
+    <Video id="startVideo" muted playsinline>
+        <source src="./assets/quiz start.mp4" >
+    </Video>
+</main>
 
 <!-- Trivia Pages -->
 
@@ -206,24 +229,7 @@
 <!-- Scripts -->
 <script src="./helper/index.js"></script> 
 
-<script>
-    const videoElement = document.getElementById('startVideo');
-    const audio = document.getElementById('backgroundMusic');
 
-
-    
-    videoElement.addEventListener('ended', (event) => {
-        videoElement.hidden = true;
-        setTimeout(() => {
-            if(videoElement.parentElement) {
-                videoElement.parentElement.remove();
-            }
-            document.querySelector('#play').style.display = 'flex';
-        }, 3000);
-    });
-
-
-</script>
 
 
    
