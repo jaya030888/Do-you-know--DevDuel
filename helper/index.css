@@ -1,526 +1,474 @@
-*{
-    margin: none;
-    padding: none;
-    border: none;
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    background-color:  #FFF0E5;
-    border-radius: 20px;
-    
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
+html, body { height: 100%; }
+body {
+    background-color: #FFF0E5; /* Warm cream background */
+    color: #3e2613; /* Dark text for easy reading */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    padding: 20px;
+    line-height: 1.6;
+    overflow-y: auto; /* Allow scrolling when content overflows */
+}
+
+/* MAIN CARD CONTAINERS*/
+/* Shared styles for start screen, video, and quiz questions */
+/* Keep containers flexible to avoid creating unwanted scrollbars */
+#play, #main, .page {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 1100px;
+    min-height: auto;
+    max-height: calc(100vh - 40px);
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(110, 70, 39, 0.15); /* Soft shadow */
+    border: 1px solid #e0ccb8;
+    position: relative;
+    overflow: hidden;
+    display: none; /* Hidden by default */
+}
+
+/* Show containers when they're active */
+.page.active, 
+#main[style*="flex"] {
+    display: flex !important;
+    flex-direction: column;
+}
+
+/* =========================================
+   SPLASH SCREEN
+   ========================================= */
 .splash-screen {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0; width: 100%; height: 100%;
     background-color: #FFF0E5;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 9999;
-    opacity: 1;
     transition: opacity 0.8s ease;
 }
+.splash-screen.hide { opacity: 0; pointer-events: none; }
+.splash-screen img { width: 100%; max-width: 400px; border-radius: 20px; }
 
-.splash-screen.hide {
-    opacity: 0;
-    pointer-events: none;
-}
+/* Make splash image bigger and more prominent */
+.splash-screen img { width: auto; max-width: 90%; max-height: 70vh; border-radius: 20px; }
 
-.splash-screen img {
-    width: 560px;
-    height: 920px;
-    object-fit: cover;
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(110, 70, 39, 0.3);
-}
-
-body{
-
-    margin-top: 10px;
-    margin-bottom: 10px;;
-    background-color: #FFF0E5;
-    display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    justify-items: center;
-    min-height: 100vh;
-}
-
-
-#main {
-    display: none;
-    position: relative;
-    width: 560px;
-    height: 920px;
-    
-    
-    border-radius: 20px; 
-    overflow: hidden; 
-    
-   
-    box-shadow: 0 20px 40px rgba(110, 70, 39, 0.3);
-    
-}
-
-
-#main video, 
-#main img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-
+/* =========================================
+   START SCREEN (#play)
+   ========================================= */
 #play {
-    display: flex; 
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    text-align: center;
+    gap: 20px;
+}
+
+#play img {
+    display: none; /* Image is now a background, not inline */
+}
+
+/* Use the background image for #play with a soft overlay for readability */
+#play {
+    background-image: url("../assets/web gfx/focus.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center left;
+    position: relative;
+}
+
+#play::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    /* Warm overlay to keep colors nice and improve text readability */
+    background: linear-gradient(rgba(255,240,229,0.72), rgba(255,240,229,0.72));
+    z-index: 0;
+}
+
+/* Make sure all content sits on top of the overlay */
+#play > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Single panel that holds all the start screen controls */
+.play-panel {
+    background: rgba(255,255,255,0.96);
+    border-radius: 16px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+    max-width: 680px;
+    width: calc(100% - 48px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+}
+
+/* Style the button inside the panel */
+.play-panel > button {
+    padding: 14px 36px;
+    margin-top: 6px;
+}
+
+/* Full-bleed mode makes the background cover the whole viewport */
+#play.full-bleed {
+    border-radius: 0;
+    max-width: none;
+    width: 100%;
+    min-height: 100vh;
+    box-shadow: none;
+    padding: 0 20px;
+}
+
+#play.full-bleed::before {
+    /* Stronger overlay for better text contrast when full-bleed */
+    background: linear-gradient(rgba(255,240,229,0.78), rgba(255,240,229,0.78));
+}
+
+/* Center the panel vertically when full-bleed */
+#play.full-bleed .play-panel {
+    margin: 6vh auto;
+}
+
+/* Show responsive start layout when JS sets inline display */
+#play[style*="display:flex"], #play[style*="display: flex"] {
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
- 
-    width: 560px;
-    height: 920px;
-    padding: 40px;
-    gap: 25px; 
-    
-
-    border-radius: 20px;
-    background-color: #FFF0E5;
-    box-shadow: 0 20px 40px rgba(110, 70, 39, 0.3);
-    color: #6e4627;
-    text-align: center;
-    transition: opacity 0.8s ease;
 }
-
-#play.hide {
-    opacity: 0;
-    pointer-events: none;
-}
-
-
-#play img {
-    width: 140px;
-    height: 140px;
-    object-fit: cover;
-    border-radius: 50%; 
-    border: 4px solid #cb7b3e;
-    box-shadow: 0 10px 20px rgba(110, 70, 39, 0.15);
-    margin-bottom: 10px;
-}
-
 
 #play h1 {
-    font-size: 1.2rem;
+    font-size: 2.2rem;
+    font-weight: 800;
     color: #3e2613;
     margin-bottom: 5px;
 }
 
 #play h3 {
     font-size: 1.1rem;
-    font-weight: normal;
-    color: #ac7952;
+    color: #ac7952; /* Light Brown Subtitle */
+    font-weight: 500;
 }
 
-
-#play > div:nth-child(3) {
-    background-color: #fff;
-    padding: 20px 30px;
-    border-radius: 15px;
-    border: 1px solid #e0ccb8;
-    width: 100%;
-    height: 70%;
+/* Category & Level Selectors */
+.category {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 10px;
-    box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
-}
-
-#play span {
-    font-size: 2rem;
-    justify-content: space-between; 
-    border-bottom: 1px dashed #e0ccb8; 
-    padding-bottom: 5px;
-}
-
-#play span:last-child {
-    border-bottom: none; 
-}
-
-
-#play button {
-    margin-top: 0;
-    border: none;
-    background-color: #cb7b3e; 
-    color: white;
-    width: 70%;
-    
-   
-    height: 90px; 
-    
-    font-size: 1.5rem; 
-    font-weight: bold;
-    border-radius: 40px; 
-    cursor: pointer;
-    box-shadow: 0 8px 20px rgba(203, 123, 62, 0.4);
-    transition: all 0.3s ease;
-}
-
-#play button:hover {
-    background-color: #e08e50;
-    transform: translateY(-3px); 
-    box-shadow: 0 12px 25px rgba(203, 123, 62, 0.5);
-}
-
-#play button:active {
-    transform: scale(0.98); 
-}
-
-.category label{
-    margin: 18px 0;
-}
-
-.page {
-
-    padding: 30px 20px;
-    display: none; 
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start; 
-    gap: 20px; 
-
- 
-    width: 560px;
-    height: 920px;
-    border-radius: 20px;
-    background-color: #FFF0E5;
-
- 
-    box-shadow: 0 15px 35px rgba(110, 70, 39, 0.25), 
-                0 5px 15px rgba(110, 70, 39, 0.15);
-    color: #6e4627;
-}
-
-
-.page img {
-    width: 180px; 
-    height: 180px;
-    object-fit: cover;
-    border-radius: 50%; 
-    border: 4px solid #cb7b3e;
-    box-shadow: 0 8px 15px rgba(110, 70, 39, 0.2);
-    margin-bottom: 10px;
-}
-
-
-.page > div:nth-child(2) {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    margin: 15px 0;
     width: 100%;
-    margin-bottom: 5px;
 }
+/* hide level selector until a category is chosen */
+#level-select { display: none; }
 
-.page h1 {
-    font-size: 1.4rem;
-    line-height: 1.4;
-    margin-bottom: 10px;
-    color: #3e2613; 
-}
-
-
-.page > div:nth-child(2) > div {
-    display: flex;
-    gap: 5px;
-    font-weight: bold;
-    color: #ac7952;
+.category h3 {
+    width: 100%;
+    font-size: 0.8rem;
     text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-    margin-bottom: 2px;
+    letter-spacing: 1.5px;
+    color: #ac7952;
+    margin-bottom: 8px;
+}
+
+.category label { cursor: pointer; position: relative; }
+
+.category label span {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #FFF0E5;
+    border: 1px solid #e0ccb8;
+    color: #6e4627;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.category input { display: none; }
+
+.category input:checked + span {
+    background-color: #cb7b3e; /* Active Orange */
+    color: white;
+    border-color: #cb7b3e;
+    box-shadow: 0 4px 10px rgba(203, 123, 62, 0.3);
+}
+/* Disabled option appearance for difficulty buttons inside .category */
+.category input:disabled + span {
+    background-color: #f0e9e2;
+    color: #a08a7a;
+    border-color: #e6ddd5;
+    cursor: not-allowed;
+    opacity: 0.8;
+    box-shadow: none;
+}
+
+/* Main Call to Action Button */
+/* Make sure buttons contrast well over the translucent panels */
+#play > button, button {
+    background-color: #cb7b3e;
+    color: white;
+    border: none;
+    padding: 16px 50px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 8px 20px rgba(203, 123, 62, 0.25);
+}
+
+button:hover {
+    background-color: #b36b32;
+    transform: translateY(-2px);
+}
+
+/* Make buttons stand out when inside #play */
+#play > button { z-index: 2; color: #fff; font-weight: 800; }
+
+/* Keep text visible inside #play and panel */
+#play h1, #play h3, .play-panel h1, .play-panel h3 {
+    color: #3e2613;
+}
+
+/* =========================================
+   QUIZ PAGE LAYOUT (.page)
+   ========================================= */
+.page.active {
+    padding: 0;
+    overflow-y: auto;
+}
+
+/* Left side: the question and category info */
+.page > div:nth-child(2) {
+    background-color: #FFF8F3; /* Slight contrast on mobile */
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid #e0ccb8;
 }
 
 .page h4 {
     color: #cb7b3e;
-    font-weight: 600;
-    font-size: 1rem;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-bottom: 20px;
 }
 
+.page h1 {
+    font-size: 1.8rem;
+    line-height: 1.4;
+    color: #3e2613;
+    font-weight: 700;
+}
 
+/* Question number and difficulty label */
+.page > div:nth-child(2) > div {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+    font-size: 0.9rem;
+    color: #ac7952;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* Right side: the answer options and buttons */
 .page > div:nth-child(3) {
-    width: 90%;
+    padding: 40px;
     display: flex;
     flex-direction: column;
-    gap: 5px; 
+    gap: 15px;
+    justify-content: center;
+    background-color: #ffffff;
 }
 
+/* Answer option cards */
 .page h5 {
-    margin: 0;
     background-color: #ffffff;
     border: 2px solid #e0ccb8;
     color: #6e4627;
-    padding: 15px 20px;
+    padding: 18px 25px;
     border-radius: 12px;
-    font-size: 1rem;
+    font-size: 1.05rem;
     cursor: pointer;
-    text-align: center;
     transition: all 0.2s ease;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    text-align: left;
+    font-weight: 500;
 }
-
 
 .page h5:hover {
-    background-color: #f9c6a0;
     border-color: #cb7b3e;
-    transform: translateY(-2px); 
-    box-shadow: 0 4px 8px rgba(110, 70, 39, 0.15);
+    background-color: #FFF0E5;
 }
-
 
 .page h5.selected {
+    border-color: #cb7b3e;
     background-color: #cb7b3e;
     color: white;
-    border-color: #6e4627;
 }
 
+/* Locked answer option after submission */
+.page h5.locked {
+    pointer-events: none;
+    opacity: 0.85;
+    filter: saturate(0.95);
+}
 
-.page button {
-    margin-top: auto; 
-    margin-bottom: 20px;
-    border: none;
+.page {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/* Warm overlay to keep text readable over the background */
+.page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(255,240,229,0.75), rgba(255,240,229,0.75));
+    z-index: 0;
+}
+
+/* Make sure all content sits on top of the overlay */
+.page > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Navigation buttons container */
+.page > div:nth-child(3) > div {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+/* Next/Finish button styling */
+.page > div:nth-child(3) > div button {
     background-color: #6e4627;
-    color: #FFF0E5;
-    width: 60%;
-    height: 55px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    border-radius: 30px;
-    cursor: pointer;
-    box-shadow: 0 5px 15px rgba(110, 70, 39, 0.3);
-    transition: background-color 0.3s ease, transform 0.1s;
+    flex: 1;
+    width: 100%;
 }
 
-.page button:hover {
-    background-color: #8c5a32;
-    transform: scale(1.02);
+/* =========================================
+   RESPONSIVE LAYOUTS
+   ========================================= */
+
+/* --- DESKTOP & TABLET (Wide screens) --- */
+@media (min-width: 900px) {
+    
+    /* Start screen: split image and controls */
+    #play[style*="display:flex"], #play[style*="display: flex"] {
+        display: grid;
+        grid-template-columns: 40% 60%;
+        text-align: center;
+        padding: 0;
+        align-items: center;
+        justify-items: center;
+    }
+
+    #play > img {
+        width: 100%; height: 100%;
+        border-radius: 0; border: none;
+        object-fit: cover;
+        grid-row: 1 / span 5;
+    }
+
+    #play > div, #play > .category, #play > button, #play > h3 {
+        padding-left: 40px;
+        padding-right: 40px;
+        justify-content: center;
+        align-self: center;
+    }
+
+    /* Quiz pages: split question and answers side-by-side */
+    .page.active {
+        flex-direction: row;
+        align-items: stretch;
+    }
+
+    /* Left column: question and category */
+    .page > div:nth-child(2) {
+        width: 45%;
+        border-bottom: none;
+        border-right: 1px solid #e0ccb8;
+        padding: 60px;
+        background-color: transparent;
+    }
+
+    /* Right column: answer options */
+    .page > div:nth-child(3) {
+        width: 55%;
+        padding: 60px;
+        background-color: transparent;
+    }
+
+    .page h1 { font-size: 2rem; }
 }
 
-.page button:active {
-    transform: scale(0.98);
-}
-
-.page button{
-    height: 50px;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .splash-screen img,
-    #main,
-    #play,
-    .page {
-        width: 90vw;
-        height: auto;
-        aspect-ratio: 9 / 14.5;
-        max-width: 560px;
-        max-height: 90vh;
-    }
-
-    .splash-screen img {
-        aspect-ratio: 9 / 14.5;
-        max-height: 90vh;
-    }
-
-    #play {
-        padding: 30px 20px;
-        gap: 15px;
-        max-height: 90vh;
-        overflow-y: auto;
-    }
-
-    #play img {
-        width: 100px;
-        height: 100px;
-    }
-
-    #play h1 {
-        font-size: 1rem;
-    }
-
-    #play h3 {
-        font-size: 0.9rem;
-    }
-
-    #play > div:nth-child(3) {
-        padding: 15px 20px;
-        height: 60%;
-    }
-
-    #play span {
-        font-size: 1.5rem;
-    }
-
-    #play button {
-        height: 70px;
-        font-size: 1.2rem;
-    }
-
-    .category label {
-        margin: 12px 0;
-        font-size: 0.9rem;
-    }
-
-    .page {
-        padding: 20px 15px;
-        gap: 15px;
-        max-height: 90vh;
-        overflow-y: auto;
-    }
-
-    .page img {
-        width: 140px;
-        height: 140px;
-    }
-
-    .page h1 {
-        font-size: 1.2rem;
-    }
-
-    .page h4 {
-        font-size: 0.9rem;
-    }
-
-    .page h5 {
-        padding: 12px 15px;
-        font-size: 0.9rem;
-    }
-
-    .page button {
-        width: 70%;
-        height: 45px;
-        font-size: 1rem;
-    }
-}
-
-/* Mobile phones - small screens */
-@media (max-width: 480px) {
+/* --- MOBILE (Stacked layout) --- */
+@media (max-width: 899px) {
     body {
-        margin: 5px;
+        padding: 0;
+        align-items: flex-start; /* Start from top */
+        background-color: #ffffff; /* White bg for seamless mobile feel */
+    }
+
+    #play, #main, .page {
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
+        max-width: none;
         min-height: 100vh;
     }
 
-    .splash-screen img,
-    #main,
-    #play,
-    .page {
-        width: 95vw;
-        max-width: none;
-        height: auto;
-        aspect-ratio: 9 / 14.5;
-        max-height: 95vh;
+    #play { padding: 30px 20px; }
+    
+    /* Sticky Footer Logic for Mobile Buttons */
+    .page.active {
+        padding-bottom: 90px; /* Space for sticky footer */
     }
 
-    #play {
-        padding: 20px 15px;
-        gap: 12px;
-        max-height: 95vh;
-        overflow-y: auto;
+    .page h1 { font-size: 1.4rem; }
+
+    .page > div:nth-child(2) {
+        padding: 30px 20px;
+        background-color: #FFF0E5; /* Keep contrast on mobile */
     }
 
-    #play img {
-        width: 80px;
-        height: 80px;
-        flex-shrink: 0;
-    }
+    .page > div:nth-child(3) { padding: 20px; }
+    .page h5 { padding: 15px; font-size: 1rem; }
 
-    #play h1 {
-        font-size: 0.9rem;
+    /* Sticky Bottom Buttons */
+    .page > div:nth-child(3) > div {
+        position: fixed;
+        bottom: 0; left: 0; width: 100% !important;
+        background: white;
+        padding: 15px 20px;
+        border-top: 1px solid #e0ccb8;
+        box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
+        z-index: 100;
+        margin-top: 0;
     }
-
-    #play h3 {
-        font-size: 0.8rem;
-    }
-
-    #play > div:nth-child(3) {
-        padding: 12px 15px;
-        height: 55%;
-        gap: 8px;
-    }
-
-    #play span {
-        font-size: 1.2rem;
-    }
-
-    #play button {
-        width: 75%;
-        height: 60px;
-        font-size: 1rem;
-        border-radius: 30px;
-        flex-shrink: 0;
-    }
-
-    .category label {
-        margin: 10px 0;
-        font-size: 0.85rem;
-    }
-
-    .page {
-        padding: 15px 12px;
-        gap: 12px;
-        max-height: 95vh;
-        overflow-y: auto;
-    }
-
-    .page img {
-        width: 120px;
-        height: 120px;
-        flex-shrink: 0;
-    }
-
-    .page h1 {
-        font-size: 1rem;
-        line-height: 1.3;
-    }
-
-    .page > div:nth-child(2) > div {
-        font-size: 0.75rem;
-    }
-
-    .page h4 {
-        font-size: 0.85rem;
-    }
-
-    .page h5 {
-        padding: 10px 12px;
-        font-size: 0.85rem;
-    }
-
+    
     .page button {
-        width: 75%;
-        height: 40px;
-        font-size: 0.9rem;
-        margin-bottom: 15px;
-        flex-shrink: 0;
-    }
-}
-
-/* Large screens */
-@media (min-width: 1200px) {
-    .splash-screen img,
-    #main,
-    #play,
-    .page {
-        width: 560px;
-        height: 920px;
-    }
-
-    #play > div:nth-child(3) {
-        height: 70%;
+        padding: 12px 24px;
+        font-size: 1rem;
     }
 }

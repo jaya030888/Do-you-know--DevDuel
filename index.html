@@ -19,41 +19,50 @@
 
 <div id="play">
     <img src="./assets/web gfx/focus.jpeg" alt="">
+    <div class="play-panel">
     <div>
         <h1>Do you know?</h1>
         <h3>There are 10 questions</h3>
     </div>
 
-        <div class="category">
-          <label>
+    <div class="category" id="subject-select">
+        <h3>1. Choose Subject</h3>
+        <label>
+            <input type="radio" name="category" value="19" /> <span>Math</span>
+        </label>
+        <label>
+            <input type="radio" name="category" value="17" /> <span>Science</span>
+        </label>
+        <label>
+            <input type="radio" name="category" value="18" /> <span>Computer</span>
+        </label>
+        <label>
+            <input type="radio" name="category" value="" /> <span>Open</span>
+        </label>
+    </div>
+
+    <div class="category" id="level-select">
+        <h3>2. Choose Level</h3>
+        <label>
             <input type="radio" name="level" value="easy" />
             <span>Easy</span>
-          </label>
-        
-          <label>
+        </label>
+        <label>
             <input type="radio" name="level" value="medium" />
             <span>Medium</span>
-          </label>
-        
-          <label>
+        </label>
+        <label>
             <input type="radio" name="level" value="hard" />
             <span>Hard</span>
-          </label>
-        
-          <label>
-            <input type="radio" name="level" value="mix" />
-            <span>Mix</span>
-          </label>
-        </div>
+        </label>
+        <label>
+            <input type="radio" name="level" value="" checked /> <span>Any</span>
+        </label>
+    </div>
     
-    <!-- <div>
-        <h5>Easy: 1 point</h5>
-        <h5>Medium: 2 point</h5>
-        <h5>hard: 4 point</h5>
-    </div> -->
-
     <h3>Average score is 5+</h3>
     <button>Lets Go!</button>
+    </div>
 </div>
 
 <main id="main">
