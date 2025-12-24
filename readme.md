@@ -7,7 +7,7 @@
 
 ## Project Overview
 
-![banner](./assets/web%20gfx/pc.jpeg)
+![banner](./assets/web%20gfx/pc.jpeg)<br>
 
 **Do You Know?** is an interactive educational quiz platform designed to make learning engaging and fun. The application delivers a gamified trivia experience with dynamic difficulty levels, instant feedback, and XP-based progression tracking - perfect for students who want to study while having fun.
 
@@ -16,7 +16,7 @@ Built with vanilla HTML5, CSS3, and JavaScript, this platform emphasizes **respo
 ---
 
 ## EduTech Impact
-
+![Happy Learning](./assets/web%20gfx/pusheen.jpeg)<br>
 This application addresses key EduTech challenges:
 
 - **Engagement:** Gamified learning with XP rewards keeps students motivated
@@ -28,6 +28,7 @@ This application addresses key EduTech challenges:
 ---
 
 ## Key Features
+![Learning Experience](./assets/web%20gfx/emotion.jpeg)<br>
 
 ### 1. **Gamified Learning Experience**
    - 10-question quizzes per session
@@ -35,11 +36,15 @@ This application addresses key EduTech challenges:
    - Difficulty levels (Easy, Medium, Hard)
    - "Open" category locked to Easy difficulty for accessibility
 
+   
+
 ### 2. **Immersive Interface**
    - Professional splash screen with intro video
    - Background music for enhanced engagement
    - Smooth page transitions and animations
    - Color-coded feedback (green for correct, red for incorrect answers)
+
+   
 
 ### 3. **Real-Time Feedback**
    - Instant visual feedback on answer selection
@@ -58,6 +63,8 @@ This application addresses key EduTech challenges:
    - Mobile: Stacked layout for optimal viewing
    - Background images for visual appeal (no text overlays)
    - Seamless transitions between screen sizes
+
+   
 
 ### 6. **Accessibility**
    - Semantic HTML for screen readers
@@ -82,6 +89,7 @@ This application addresses key EduTech challenges:
 ---
 
 ## How to Set Up & Run
+![Mobile & Desktop](./assets/web%20gfx/mobile.jpeg) <br>
 
 ### Prerequisites
 - A modern web browser (Chrome, Firefox, Safari, Edge)
@@ -144,9 +152,12 @@ Do you know -DevDuel/
 6. **View Results:** See your session score and total lifetime XP
 7. **Study Again:** Click "Study Again" to restart with a new set of questions
 
+
+
 ---
 
 ## 📊 Scoring System
+![Focus & Learning](./assets/web%20gfx/focus.jpeg)<br>
 
 | Difficulty | Points |
 |------------|--------|
@@ -257,8 +268,10 @@ This is a hackathon submission. Post-competition contributions and enhancements 
 
 For questions about this project, please reach out via GitHub issues or the Dev Duel Discord server.
 
-**Discord:** [Dev Duel Community](https://discord.gg/SwmEp2A4)
+**Discord:** [Dev Duel Community](https://discord.gg/SwmEp2A4)<br>
 
 ---
 
 **Happy Learning!**
+
+![Immersive Interface](./assets/web%20gfx/laptop.jpeg)<br>
