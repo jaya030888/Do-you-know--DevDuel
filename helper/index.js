@@ -40,7 +40,22 @@ videoElement.addEventListener('ended', (event) => {
 
 
 playButton.addEventListener('click', () => {
-    // Start the background music and show the video
+
+    // Grab what the user selected: category and difficulty
+    const categoryInput = document.querySelector('input[name="category"]:checked');
+    const categoryValue = categoryInput ? categoryInput.value : '';
+
+    const levelInput = document.querySelector('input[name="level"]:checked');
+    const difficultyValue = levelInput ? levelInput.value : '';
+
+        // If user don't select any category
+
+    if (!categoryValue) {
+                alert("Please select an catagory first.");
+                return;
+            }
+
+        // Start the background music and show the video
     audio.muted = false;
     audio.volume = 0.20;
     document.getElementById('main').style.display = 'flex';
@@ -52,16 +67,11 @@ playButton.addEventListener('click', () => {
     }).catch(error => {
         console.log("Playback failed:", error);
     });
-
-    // Grab what the user selected: category and difficulty
-    const categoryInput = document.querySelector('input[name="category"]:checked');
-    const categoryValue = categoryInput ? categoryInput.value : '';
-
-    const levelInput = document.querySelector('input[name="level"]:checked');
-    const difficultyValue = levelInput ? levelInput.value : '';
+    
 
     // Build the API request URL with the user's choices
     let dynamicUrl = 'https://opentdb.com/api.php?amount=10';
+
 
     if (categoryValue) {
         dynamicUrl += `&category=${categoryValue}`;
