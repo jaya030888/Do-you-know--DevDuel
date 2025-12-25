@@ -285,8 +285,14 @@ function enableGameLogic() {
                 let options = active.querySelectorAll('h5');
                 // Color the correct answer green and wrong answer red
                 options.forEach(opt => {
-                    if (opt.dataset.isCorrect === "true") opt.style.backgroundColor = '#90EE90';
-                    if (opt === selected && !isCorrect) opt.style.backgroundColor = '#FFB6C1';
+                    if (opt.dataset.isCorrect === "true"){
+                        opt.style.backgroundColor = '#90EE90';
+                        opt.style.borderColor = '#90EE90';
+                    }
+                    if (opt === selected && !isCorrect){
+                        opt.style.backgroundColor = '#fb7c55ff';
+                        opt.style.borderColor = '#fb7c55ff';
+                    }
                 });
 
                 // Add points if they got it right
@@ -322,7 +328,7 @@ function enableGameLogic() {
                     const newActive = getActivePage();
                     const newIdx = getIndexOf(newActive);
                     changePage(newIdx + 1);
-                }, 900);
+                }, 1500);
             } else {
                 // On the final submission, show the results screen
                 showResults();
